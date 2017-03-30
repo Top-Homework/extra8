@@ -30,6 +30,7 @@ __Inorder- Algorithm__
   * Visit left subtree
   * Visit root
   * Visit right subtree
+
 __Postorder - Algorithm__
   * Visit left subtree
   * Visit right subtree
