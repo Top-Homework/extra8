@@ -9,11 +9,11 @@ Simple C++ program illustrating preorder, inorder, and postorder traversals of t
   * Level-order
 * Depth-first
   * Preorder
-    * <root><left><right>
+    * \<root\>\<left\>\<right\>
   * Inorder
-    * <left><root><right>
+    * \<left\>\<root\>\<right\>
   * Postorder
-    * <left><right><root>
+    * \<left\>\<right\>\<root\>
   * Time Complexity
     * All of the algorithms are O(n)
   * Space Complexity
