@@ -5,26 +5,50 @@
 using namespace std;
 
 struct node {
-    char data = ' ';
+    int data = ' ';
     node *left = 0;
     node *right = 0;
 };
 
-class tree {
-public:
-    tree(){}
+node* getNewNode(int data) {
+    node *newNode = new node();
+    newNode->data = data;
+    newNode->left = 0;
+    newNode->right = 0;
+    return newNode;
+}
 
-    ~tree(){}
+node* insert(node *root, int data) {
+    if (root == nullptr) { //if tree is empty
+        root = getNewNode(data);
+    }
+    else if (data <= root->data) {
+        root->left = insert(root->left, data);
+    }
+    else {
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
 
+bool search(node *root, int data) {
+    if (root == nullptr) {
+        return false;
+    }
+    else if (root->data == data) {
+        return true;
+    }
+    else if(data <= root->data) {
+        return search(root->left, data);
+    }
+    else {
+        return search(root->right, data);
+    }
+}
 
-private:
-    node *root = 0;
-    
-};
-
-void print(list<char> & mylist) {
+void print(list<int> & mylist) {
     cout << "\ttree contains:";
-    for (list<char>::iterator it = mylist.begin(); it != mylist.end(); ++it) {
+    for (list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it) {
         cout << " " << *it;
     }
     cout << endl;
@@ -41,17 +65,31 @@ void preorder(node *root) {
 
 
 int main(int argc, char * argv[]) {
-    // preorder();
-    list<char> mylist;
-    tree a;
-    mylist.push_back('A');
-    mylist.push_back('B');
-    mylist.push_back('C');
-    mylist.push_back('D');
+    // list<int> mylist;
+    // mylist.push_back(1);
+    // mylist.push_back(2);
+    // mylist.push_back(3);
+    // mylist.push_back(4);
 
-    print(mylist);
-    // a.print(mylist);
+    // print(mylist);
+
+    node *root = 0;
+    root = insert(root, 15);
+    root = insert(root, 10);
+    root = insert(root, 20);
+    root = insert(root, 25);
+    root = insert(root, 8);
+    root = insert(root, 12);
     
-    cout << endl;
+    int number;
+    cout << "Enter number to be searched\n";
+    cin >> number;
+    if(search(root, number) == true) {
+        cout << "Found\n";
+    }
+    else {
+        cout << "Not Found\n";
+    }
+
     return 0;
 }
