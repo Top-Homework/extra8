@@ -1,11 +1,12 @@
 #include <cstdio>
 #include <iostream>
 #include <list>
+#include <algorithm>
 
 using namespace std;
 
 struct node {
-    int data = ' ';
+    int data = 0;
     node *left = 0;
     node *right = 0;
 };
@@ -46,6 +47,36 @@ bool search(node *root, int data) {
     }
 }
 
+int find_min(node *root) { //Smaller number will always be to the left
+    if(root == nullptr) {
+        cout << "Error: Tree is empty\n";
+        return -1;
+    }
+    else if(root->left == nullptr) {
+        return root->data;
+    }
+    return find_min(root->left);
+}
+
+int find_max(node *root) { //Larger number will always be to the right
+    if(root == nullptr) {
+        cout << "Error: Tree is empty\n";
+        return -1;
+    }
+    else if(root->right == nullptr) {
+        return root->data;
+    }
+    return find_max(root->right);
+}
+
+int find_height(node *root) { /*Defines height as counting the number of edges in the longest path of a tree
+    To implement height as the number of nodes in the longest path of a tree need to return 0 instead of -1*/
+    if(root == nullptr) {
+        return -1;
+    }
+    return max(find_height(root->left), find_height(root->right)) + 1;
+}
+
 void print(list<int> & mylist) {
     cout << "\ttree contains:";
     for (list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it) {
@@ -62,7 +93,6 @@ void preorder(node *root) {
     preorder(root->left);
     preorder(root->right);
 }
-
 
 int main(int argc, char * argv[]) {
     // list<int> mylist;
@@ -81,15 +111,19 @@ int main(int argc, char * argv[]) {
     root = insert(root, 8);
     root = insert(root, 12);
     
-    int number;
-    cout << "Enter number to be searched\n";
-    cin >> number;
-    if(search(root, number) == true) {
-        cout << "Found\n";
-    }
-    else {
-        cout << "Not Found\n";
-    }
+    cout << "\tMinimum: " << find_min(root) << endl;
+    cout << "\tMaximum: " << find_max(root) << endl;
+    cout << "\tHeight: " << find_height(root) << endl;
+
+    // int number;
+    // cout << "Enter number to be searched\n";
+    // cin >> number;
+    // if(search(root, number) == true) {
+    //     cout << "Found\n";
+    // }
+    // else {
+    //     cout << "Not Found\n";
+    // }
 
     return 0;
 }
