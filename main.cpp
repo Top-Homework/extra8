@@ -94,6 +94,24 @@ void preorder(node *root) {
     preorder(root->right);
 }
 
+void inorder(node *root) {
+    if (root == nullptr) {
+        return;
+    }
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+
+void postorder(node *root) {
+    if (root == nullptr) {
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
+}
+
 int main(int argc, char * argv[]) {
     // list<int> mylist;
     // mylist.push_back(1);
