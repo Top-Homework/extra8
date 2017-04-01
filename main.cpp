@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <iostream>
 #include <list>
+#include <queue>
 #include <algorithm>
 
 using namespace std;
@@ -85,6 +86,25 @@ void print(list<int> & mylist) {
     cout << endl;
 }
 
+void levelorder(node *root) {
+    if (root == nullptr) {
+        return;
+    }
+    queue<node*> q;
+    q.push(root);
+    while(!q.empty()) {
+        node *current = q.front();
+        cout << current->data << " ";
+        if(current->left != nullptr) {
+            q.push(current->left);
+        }
+        if(current->right != nullptr) {
+            q.push(current->right);
+        }
+        q.pop();
+    }
+}
+
 void preorder(node *root) {
     if (root == nullptr) {
         return;
@@ -122,16 +142,19 @@ int main(int argc, char * argv[]) {
     // print(mylist);
 
     node *root = 0;
-    root = insert(root, 15);
-    root = insert(root, 10);
-    root = insert(root, 20);
-    root = insert(root, 25);
+    root = insert(root, 5);
+    root = insert(root, 2);
+    root = insert(root, 1);
+    root = insert(root, 4);
+    root = insert(root, 3);
+    root = insert(root, 7);
+    root = insert(root, 6);
     root = insert(root, 8);
-    root = insert(root, 12);
     
     cout << "\tMinimum: " << find_min(root) << endl;
     cout << "\tMaximum: " << find_max(root) << endl;
     cout << "\tHeight: " << find_height(root) << endl;
+    cout << endl;
 
     // int number;
     // cout << "Enter number to be searched\n";
@@ -142,6 +165,16 @@ int main(int argc, char * argv[]) {
     // else {
     //     cout << "Not Found\n";
     // }
+
+    cout << "\tLevelorder: ";
+    levelorder(root);
+    cout << endl;
+    cout << "\tPreorder: ";
+    preorder(root);
+    cout << endl;
+    cout << "\tPostorder: ";
+    postorder(root);
+    cout << endl;
 
     return 0;
 }
