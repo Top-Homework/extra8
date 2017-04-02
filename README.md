@@ -1,13 +1,12 @@
 # extra8
-Simple C++ program illustrating preorder, inorder, and postorder traversals of trees
+Simple C++ program illustrating binary trees and their properties.
 
-## My Code School Tree Traversals
-[YouTube link](https://www.youtube.com/watch?v=gm8DUJJhmY4)
+## My Code School
 
 ### Binary Tree Traversal
-* Breadth-first
+* Breadth-first [YouTube Link](https://youtu.be/86g8jAQug04)
   * Level-order
-* Depth-first
+* Depth-first [YouTube link](https://www.youtube.com/watch?v=gm8DUJJhmY4)
   * Preorder
     * \<root\>\<left\>\<right\>
   * Inorder
@@ -35,3 +34,7 @@ __Postorder - Algorithm__
   * Visit left subtree
   * Visit right subtree
   * Visit root
+
+### Check if a Given Binary Tree is a Binary Search Tree
+* Binary Search Tree
+  * A binary tree in which for each node the value of all the nodes in left subtree is lesser or equal and value of all the nodes in right subtree is greater.

@@ -3,6 +3,7 @@
 #include <list>
 #include <queue>
 #include <algorithm>
+#include <climits>
 
 using namespace std;
 
@@ -132,12 +133,29 @@ void postorder(node *root) {
     cout << root->data << " ";
 }
 
+bool is_bst_util(node *root, int min, int max) { //return true if BST, false otherwise
+    if(root == nullptr) {
+        return true;
+    }
+    if(root->data > min && root->data <= max && is_bst_util(root->left, min, root->data) && is_bst_util(root->right, root->data, max)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool is_bst(node *root) {
+    return is_bst_util(root, INT_MIN, INT_MAX);
+}
+
 int main(int argc, char * argv[]) {
+    // node *head = 0;
     // list<int> mylist;
-    // mylist.push_back(1);
-    // mylist.push_back(2);
-    // mylist.push_back(3);
-    // mylist.push_back(4);
+    // head = mylist.push_back(1);
+    // head = mylist.push_back(2);
+    // head = mylist.push_back(3);
+    // head = mylist.push_back(4);
 
     // print(mylist);
 
@@ -155,6 +173,16 @@ int main(int argc, char * argv[]) {
     cout << "\tMaximum: " << find_max(root) << endl;
     cout << "\tHeight: " << find_height(root) << endl;
     cout << endl;
+
+    int number;
+    if(is_bst(root) == true) {
+        cout << "\tYes, BST" << endl;
+        cout << endl;
+    }
+    else {
+        cout << "\tNot BST" << endl;
+        cout << endl;        
+    }
 
     // int number;
     // cout << "Enter number to be searched\n";
