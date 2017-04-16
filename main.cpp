@@ -150,7 +150,40 @@ bool is_bst(node *root) {
 }
 
 node* delete(node* root, int data) {
-    
+    if (root == nullptr) {
+        return root; //Can also return NULL
+    }
+    else if (data < root->data) {
+        root->left = delete(root->left, data);
+    }
+    else if (data > root->data) {
+        root->right = delete(root->right, data);
+    }
+    else { //Found the right, will now be deleted
+        //Case 1: No child
+        if (root->left == nullptr && root->right == nullptr) {
+            delete root; //Deallocate memory of an object from heap
+            root = nullptr; //root is a dangling pointer so set root to NULL to mitigate
+        }
+        //Case 2: One child
+        else if (root->left == nullptr) {
+            node *temp = root; //Store address of current node trying to delete in temp pointer
+            root = root->right; //Move root to right child
+            delete temp;
+        }
+        else if (root->right == nullptr) {
+            node *temp = root;
+            root = root->left;
+            delete temp;
+        }
+        //Case 3: 2 children
+        else {
+            node *temp = find_min(root->right);
+            root->data = temp->data;
+            root->right = delete(root->right, temp->data);
+        }
+    }
+    return root;
 }
 
 int main(int argc, char * argv[]) {

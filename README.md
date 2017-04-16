@@ -48,4 +48,12 @@ __Postorder - Algorithm__
     * Deleting a node with one child has 2 different outcomes.
       * If deleting a node on the right side of the parent then connect parent with its only child and delete child from memory.
       * Repeat same process as above, but for left link
-  3. 2 children 
+  3. 2 children
+    * First approach is to reduce the case to either case 2 or case 1 for right link
+      1. Find minimum in right-subtree
+      2. Copy the value in targetted node
+      3. Delete duplicate from right-subtree
+    * Second approach is to reduce the case to either case 2 or case 1 for left link
+      1. Find maximum in left-subtree
+      2. Copy the value in targetted node
+      3. Delete duplicate from left-subtree
