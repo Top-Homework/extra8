@@ -149,6 +149,10 @@ bool is_bst(node *root) {
     return is_bst_util(root, INT_MIN, INT_MAX);
 }
 
+node* delete(node* root, int data) {
+    
+}
+
 int main(int argc, char * argv[]) {
     // node *head = 0;
     // list<int> mylist;
