@@ -49,15 +49,11 @@ bool search(node *root, int data) {
     }
 }
 
-int find_min(node *root) { //Smaller number will always be to the left
-    if(root == nullptr) {
-        cout << "Error: Tree is empty\n";
-        return -1;
+node* find_min(node *root) { //Smaller number will always be to the left
+    while(root->left != NULL)  {
+        root = root->left;
     }
-    else if(root->left == nullptr) {
-        return root->data;
-    }
-    return find_min(root->left);
+	return root;
 }
 
 int find_max(node *root) { //Larger number will always be to the right
@@ -149,15 +145,15 @@ bool is_bst(node *root) {
     return is_bst_util(root, INT_MIN, INT_MAX);
 }
 
-node* delete(node* root, int data) {
+node* deletenode(node* root, int data) {
     if (root == nullptr) {
         return root; //Can also return NULL
     }
     else if (data < root->data) {
-        root->left = delete(root->left, data);
+        root->left = deletenode(root->left, data);
     }
     else if (data > root->data) {
-        root->right = delete(root->right, data);
+        root->right = deletenode(root->right, data);
     }
     else { //Found the right, will now be deleted
         //Case 1: No child
@@ -180,33 +176,26 @@ node* delete(node* root, int data) {
         else {
             node *temp = find_min(root->right);
             root->data = temp->data;
-            root->right = delete(root->right, temp->data);
+            root->right = deletenode(root->right, temp->data);
         }
     }
     return root;
 }
 
 int main(int argc, char * argv[]) {
-    // node *head = 0;
-    // list<int> mylist;
-    // head = mylist.push_back(1);
-    // head = mylist.push_back(2);
-    // head = mylist.push_back(3);
-    // head = mylist.push_back(4);
-
-    // print(mylist);
-
     node *root = 0;
+    root = insert(root, 12);
     root = insert(root, 5);
-    root = insert(root, 2);
-    root = insert(root, 1);
-    root = insert(root, 4);
+    root = insert(root, 15);
     root = insert(root, 3);
     root = insert(root, 7);
-    root = insert(root, 6);
-    root = insert(root, 8);
+    root = insert(root, 13);
+    root = insert(root, 17);
+    root = insert(root, 1);
+    root = insert(root, 9);
     
-    cout << "\tMinimum: " << find_min(root) << endl;
+    node *temp = find_min(root);
+    cout << "\tMinimum: " << temp->data << endl;
     cout << "\tMaximum: " << find_max(root) << endl;
     cout << "\tHeight: " << find_height(root) << endl;
     cout << endl;
@@ -221,16 +210,6 @@ int main(int argc, char * argv[]) {
         cout << endl;        
     }
 
-    // int number;
-    // cout << "Enter number to be searched\n";
-    // cin >> number;
-    // if(search(root, number) == true) {
-    //     cout << "Found\n";
-    // }
-    // else {
-    //     cout << "Not Found\n";
-    // }
-
     cout << "\tLevelorder: ";
     levelorder(root);
     cout << endl;
@@ -239,6 +218,13 @@ int main(int argc, char * argv[]) {
     cout << endl;
     cout << "\tPostorder: ";
     postorder(root);
+    cout << endl;
+
+    cout << "\tDelete 15: ";
+    deletenode(root, 15);
+    cout << endl;
+    cout << "\tLevelorder: ";
+    levelorder(root);
     cout << endl;
 
     return 0;

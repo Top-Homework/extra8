@@ -41,7 +41,7 @@ __Postorder - Algorithm__
 
 ### Delete a Node from a Binary Search Tree
 * [YouTube link](https://youtu.be/gcULXE7ViZw)
-* COnsider 3 cases
+* Consider 3 cases
   1. No child
     * Deleting a leaf node will not have an effect on the binary search tree
   2. One child
