@@ -50,6 +50,9 @@ bool search(node *root, int data) {
 }
 
 node* find_min(node *root) { //Smaller number will always be to the left
+    if (root == nullptr) {
+        return nullptr;
+    }
     while(root->left != NULL)  {
         root = root->left;
     }
@@ -182,17 +185,61 @@ node* deletenode(node* root, int data) {
     return root;
 }
 
+node* find(node *root, int data) {
+    if (root == nullptr) {
+        return nullptr;
+    }
+    else if (root->data == data) {
+        return root;
+    }
+    else if (root->data < data) {
+        return find(root->right, data);
+    }
+    else {
+        return find(root->left, data);
+    }
+}
+
+node* getsuccessor(node *root, int data) {
+    // Search the node - O(h)
+    node *current = find(root, data);
+    if (current == nullptr) {
+        return nullptr;
+    }
+    // Case 1: Node has right subtree
+    if (current->right != nullptr) {
+        return find_min(current->right);
+    }
+    // Case 2: No right subtree - O(h)
+    else {
+        node *successor = nullptr;
+        node *ancestor = root;
+        while (ancestor != current) {
+            if (current->data < ancestor->data) {
+                successor = ancestor;
+                ancestor = ancestor->left;
+            }
+            else {
+                ancestor = ancestor->right;
+            }
+        }
+        return successor;
+    }
+}
+
 int main(int argc, char * argv[]) {
     node *root = 0;
-    root = insert(root, 12);
-    root = insert(root, 5);
     root = insert(root, 15);
-    root = insert(root, 3);
-    root = insert(root, 7);
-    root = insert(root, 13);
+    root = insert(root, 10);
+    root = insert(root, 20);
+    root = insert(root, 8);
+    root = insert(root, 12);
     root = insert(root, 17);
-    root = insert(root, 1);
-    root = insert(root, 9);
+    root = insert(root, 25);
+    root = insert(root, 6);
+    root = insert(root, 11);
+    root = insert(root, 16);
+    root = insert(root, 27);
     
     node *temp = find_min(root);
     cout << "\tMinimum: " << temp->data << endl;
@@ -216,8 +263,20 @@ int main(int argc, char * argv[]) {
     cout << "\tPreorder: ";
     preorder(root);
     cout << endl;
+    cout << "\tInorder: ";
+    inorder(root);
+    cout << endl;
     cout << "\tPostorder: ";
     postorder(root);
+    cout << endl;
+
+    node *successor = getsuccessor(root, 10);
+    if (successor == nullptr) {
+        cout << "\tNo successor found\n";
+    }
+    else {
+        cout << "\tSuccessor of 10 is: " << successor->data << endl;
+    }
     cout << endl;
 
     cout << "\tDelete 15: ";

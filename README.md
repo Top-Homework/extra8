@@ -42,13 +42,13 @@ __Postorder - Algorithm__
 ### Delete a Node from a Binary Search Tree
 * [YouTube link](https://youtu.be/gcULXE7ViZw)
 * Consider 3 cases
-  1. No child
+  * Case 1 -  No child
     * Deleting a leaf node will not have an effect on the binary search tree
-  2. One child
+  * Case 2 - One child
     * Deleting a node with one child has 2 different outcomes.
       * If deleting a node on the right side of the parent then connect parent with its only child and delete child from memory.
       * Repeat same process as above, but for left link
-  3. 2 children
+  * Case 3 - 2 children
     * First approach is to reduce the case to either case 2 or case 1 for right link
       1. Find minimum in right-subtree
       2. Copy the value in targetted node
@@ -57,3 +57,11 @@ __Postorder - Algorithm__
       1. Find maximum in left-subtree
       2. Copy the value in targetted node
       3. Delete duplicate from left-subtree
+
+### Inorder Successor in a Binary Search Tree
+* [YouTube link](https://youtu.be/5cPbNCrdotA)
+* Consider 3 cases
+  * Case 1 - Node has right subtree
+    * Go deep to leftmost node in right subtree or find minimum in right subtree
+  * Case 2 - No right subtree
+    * Go to the nearest ancestor for which given node would be in left subtree
